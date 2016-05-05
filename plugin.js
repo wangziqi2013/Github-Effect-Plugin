@@ -62,6 +62,46 @@ var E_bitmap = [
   [1, 1, 1, 1, 1, 1, 1],
 ];
 
+var F_bitmap = [
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 0, 0, 0, 0, 0],
+  [1, 1, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 0],
+  [1, 1, 0, 0, 0, 0, 0],
+  [1, 1, 0, 0, 0, 0, 0],
+  [1, 1, 0, 0, 0, 0, 0],
+];
+
+var G_bitmap = [
+  [0, 0, 1, 1, 1, 1, 1],
+  [0, 1, 1, 0, 0, 0, 0],
+  [1, 1, 0, 0, 0, 0, 0],
+  [1, 1, 0, 0, 1, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [0, 1, 1, 0, 0, 1, 1],
+  [0, 0, 1, 1, 1, 1, 1],
+];
+
+var H_bitmap = [
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+];
+
+var I_bitmap = [
+  [1, 1, 1, 1, 1, 1],
+  [0, 0, 1, 1, 0, 0],
+  [0, 0, 1, 1, 0, 0],
+  [0, 0, 1, 1, 0, 0],
+  [0, 0, 1, 1, 0, 0],
+  [0, 0, 1, 1, 0, 0],
+  [1, 1, 1, 1, 1, 1],
+];
+
 /*
  * pos_to_offset() - Convert row-col position to offset in the array
  *
@@ -165,9 +205,16 @@ function change_commit_record()
 //change_commit_record();
 
 clear_all(document.getElementsByClassName("day"));
-draw_bitmap(document.getElementsByClassName("day"),
-            E_bitmap, 
+var next_col = 20;
+
+next_col = draw_bitmap(document.getElementsByClassName("day"),
+            H_bitmap, 
             "#FF0000",
-            20);
+            next_col);
+
+next_col = draw_bitmap(document.getElementsByClassName("day"),
+            I_bitmap, 
+            "#FF0000",
+            next_col + 1);
 
 
