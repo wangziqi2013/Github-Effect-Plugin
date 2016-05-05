@@ -12,6 +12,13 @@ var char_interval = 1;
 // The color we use as background color
 var default_color = "#EEEEEE";
 
+// The number of missing grids on the first column of
+// the commit record
+var offset_adjustment = 0;
+
+// This is the global array of commit records in the calendar
+var commit_list = document.getElementsByClassName("day");
+
 var A_bitmap = [
   [0, 0, 1, 1, 1, 0, 0],
   [0, 1, 1, 0, 1, 1, 0],
@@ -103,6 +110,52 @@ var I_bitmap = [
 ];
 
 /*
+ * get_offset_adjustment() - Get the adjustment for starting
+ *                           array index of commit records
+ *
+ * Since this will change for different days in a week, we need
+ * to use the number of grids in the first column to determine
+ * the offset
+ */
+function get_offset_adjustment()
+{ 
+  var commit_record = document.getElementsByClassName("js-calendar-graph-svg");
+  
+  if(commit_record.length != 1)
+  {
+    alert("ERROR: Could not find commit record!");
+    
+    return;
+  }
+  
+  // Get the first elememnt from the list
+  commit_record = commit_record[0];
+  
+  if(commit_record.children.length < 1)
+  {
+    alert("ERROR: Could not find commit record in childNode");
+    
+    return;
+  }
+  
+  commit_record = commit_record.children[0];
+  
+  if(commit_record.children.length < 1)
+  {
+    alert("ERROR: Could not find commit record in child's childNode");
+    
+    return;
+  }
+  
+  var first_col = commit_record.children[0];
+  
+  // If there are 7 records then adjustment is effectively 0
+  offset_adjustment = 7 - first_col.children.length;
+  
+  return;
+}
+
+/*
  * pos_to_offset() - Convert row-col position to offset in the array
  *
  * If the position does not exist in the array, we just return -1
@@ -118,7 +171,9 @@ function pos_to_offset(array, row, col)
   } 
   else
   {
-    offset -= 1;
+    // Need to consider the number of missing
+    // records in the first column
+    offset -= offset_adjustment;
   }
   
   if(offset >= array.length)  
@@ -189,7 +244,7 @@ function draw_bitmap(array,
 
 function change_commit_record()
 {
-  rect_list = document.getElementsByClassName("day");
+  var rect_list = document.getElementsByClassName("day");
   
   for(var i = 0;i < rect_list.length;i++)
   {
@@ -202,19 +257,20 @@ function change_commit_record()
   return;
 }
 
-//change_commit_record();
+// This must be called first before any drawing
+get_offset_adjustment();
+clear_all(commit_list);
 
-clear_all(document.getElementsByClassName("day"));
 var next_col = 20;
 
-next_col = draw_bitmap(document.getElementsByClassName("day"),
-            H_bitmap, 
-            "#FF0000",
-            next_col);
+next_col = draw_bitmap(commit_list,
+                       H_bitmap, 
+                       "#FFFF00",
+                       next_col);
 
 next_col = draw_bitmap(document.getElementsByClassName("day"),
-            I_bitmap, 
-            "#FF0000",
-            next_col + 1);
+                       I_bitmap, 
+                       "#FF00FF",
+                       next_col + 1);
 
 
