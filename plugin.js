@@ -159,6 +159,46 @@ var N_bitmap = [
   [1, 1, 0, 0, 0, 1, 1],
 ];
 
+var O_bitmap = [
+  [0, 1, 1, 1, 1, 1, 0],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [0, 1, 1, 1, 1, 1, 0],
+];
+
+var P_bitmap = [
+  [1, 1, 1, 1, 1, 1, 0],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0],
+  [1, 1, 0, 0, 0, 0, 0],
+  [1, 1, 0, 0, 0, 0, 0],
+];
+
+var Q_bitmap = [
+  [0, 1, 1, 1, 1, 1, 0],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 1, 1, 1, 1],
+  [1, 1, 0, 0, 1, 1, 0],
+  [0, 1, 1, 1, 1, 0, 1],
+];
+
+var R_bitmap = [
+  [1, 1, 1, 1, 1, 1, 0],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1, 0, 0],
+  [1, 1, 0, 1, 1, 1, 0],
+  [1, 1, 0, 0, 1, 1, 1],
+];
+
 /*
  * get_offset_adjustment() - Get the adjustment for starting
  *                           array index of commit records
@@ -311,31 +351,29 @@ function change_commit_record()
 get_offset_adjustment();
 clear_all(commit_list);
 
-var next_col = 10;
-
-next_col = draw_bitmap(commit_list,
-                       J_bitmap, 
-                       "#0000FF",
-                       next_col);
-
-next_col = draw_bitmap(commit_list,
-                       K_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
-
-next_col = draw_bitmap(commit_list,
-                       L_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
-
-next_col = draw_bitmap(commit_list,
-                       M_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
+var next_col = 9;
 
 next_col = draw_bitmap(commit_list,
                        N_bitmap, 
                        "#0000FF",
                        next_col + 1);
 
+next_col = draw_bitmap(commit_list,
+                       O_bitmap, 
+                       "#0000FF",
+                       next_col + 1);
 
+next_col = draw_bitmap(commit_list,
+                       P_bitmap, 
+                       "#0000FF",
+                       next_col + 1);
+
+next_col = draw_bitmap(commit_list,
+                       Q_bitmap, 
+                       "#0000FF",
+                       next_col + 1);
+
+next_col = draw_bitmap(commit_list,
+                       R_bitmap, 
+                       "#0000FF",
+                       next_col + 1);
