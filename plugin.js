@@ -206,35 +206,31 @@ var R_bitmap = [
  * Since this will change for different days in a week, we need
  * to use the number of grids in the first column to determine
  * the offset
+ *
+ * Return true if the commit record is found. Return false if not
  */
 function get_offset_adjustment()
 { 
   var commit_record = document.getElementsByClassName("js-calendar-graph-svg");
   
   if(commit_record.length != 1)
-  {
-    alert("ERROR: Could not find commit record!");
-    
-    return;
+  {    
+    return false;
   }
   
   // Get the first elememnt from the list
   commit_record = commit_record[0];
   
   if(commit_record.children.length < 1)
-  {
-    alert("ERROR: Could not find commit record in childNode");
-    
-    return;
+  { 
+    return false;
   }
   
   commit_record = commit_record.children[0];
   
   if(commit_record.children.length < 1)
   {
-    alert("ERROR: Could not find commit record in child's childNode");
-    
-    return;
+    return false;
   }
   
   var first_col = commit_record.children[0];
@@ -242,7 +238,7 @@ function get_offset_adjustment()
   // If there are 7 records then adjustment is effectively 0
   offset_adjustment = 7 - first_col.children.length;
   
-  return;
+  return true;
 }
 
 /*
@@ -348,32 +344,33 @@ function change_commit_record()
 }
 
 // This must be called first before any drawing
-get_offset_adjustment();
-clear_all(commit_list);
+if(get_offset_adjustment() == true) {
+  clear_all(commit_list);
 
-var next_col = 9;
+  var next_col = 9;
 
-next_col = draw_bitmap(commit_list,
-                       N_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
+  next_col = draw_bitmap(commit_list,
+                         N_bitmap, 
+                         "#0000FF",
+                         next_col + 1);
 
-next_col = draw_bitmap(commit_list,
-                       O_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
+  next_col = draw_bitmap(commit_list,
+                         O_bitmap, 
+                         "#0000FF",
+                         next_col + 1);
 
-next_col = draw_bitmap(commit_list,
-                       P_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
+  next_col = draw_bitmap(commit_list,
+                         P_bitmap, 
+                         "#0000FF",
+                         next_col + 1);
 
-next_col = draw_bitmap(commit_list,
-                       Q_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
+  next_col = draw_bitmap(commit_list,
+                         Q_bitmap, 
+                         "#0000FF",
+                         next_col + 1);
 
-next_col = draw_bitmap(commit_list,
-                       R_bitmap, 
-                       "#0000FF",
-                       next_col + 1);
+  next_col = draw_bitmap(commit_list,
+                         R_bitmap, 
+                         "#0000FF",
+                         next_col + 1);
+}
